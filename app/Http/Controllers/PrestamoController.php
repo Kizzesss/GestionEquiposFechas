@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Prestamo;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 /**
  * Class PrestamoController
@@ -105,5 +106,16 @@ class PrestamoController extends Controller
 
         return redirect()->route('prestamos.index')
             ->with('success', 'Prestamo deleted successfully');
+    }
+
+    public function filtrar(Request $request){ 
+
+        $prestamos = Prestamo::where('fecha_inicio', '>=', $request->fecha_inicio)
+            ->where('fecha_fin', '<=', $request->fecha_fin)
+            ->paginate();
+
+        return view('prestamo.index', compact('prestamos'))
+            ->with('i', (request()->input('page', 1) - 1) * $prestamos->perPage());
+        
     }
 }

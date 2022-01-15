@@ -42,9 +42,6 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('equipos.index') }}">{{ __('Equipos') }}</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="">{{ __('Multa') }}</a>
-                        </li>
 
                         @endif
 
