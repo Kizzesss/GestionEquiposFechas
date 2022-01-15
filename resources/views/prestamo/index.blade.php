@@ -38,6 +38,7 @@
                                         
 										<th>Equipo Id</th>
 										<th>Usuario</th>
+										<th>Estado</th>
 										<th>Fecha Inicio</th>
 										<th>Fecha Fin</th>
 										<th>Fecha Fentrega</th>
@@ -52,6 +53,7 @@
                                             
 											<td>{{ $prestamo->equipo_id }}</td>
 											<td>{{ $prestamo->usuario }}</td>
+											<td>{{ $prestamo->estado }}</td>
 											<td>{{ $prestamo->fecha_inicio }}</td>
 											<td>{{ $prestamo->fecha_fin }}</td>
 											<td>{{ $prestamo->fecha_fentrega }}</td>

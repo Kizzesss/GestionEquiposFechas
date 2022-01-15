@@ -29,6 +29,10 @@
                             {{ $prestamo->usuario }}
                         </div>
                         <div class="form-group">
+                            <strong>Estado:</strong>
+                            {{ $prestamo->estado }}
+                        </div>
+                        <div class="form-group">
                             <strong>Fecha Inicio:</strong>
                             {{ $prestamo->fecha_inicio }}
                         </div>

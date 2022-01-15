@@ -20,8 +20,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::resource('prestamos', App\Http\Controllers\PrestamoController::class);
-Route::resource('equipos', App\Http\Controllers\EquipoController::class);
+Route::resource('prestamos', App\Http\Controllers\PrestamoController::class)->middleware('auth');
+Route::resource('equipos', App\Http\Controllers\EquipoController::class)->middleware('auth');
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -12,6 +12,11 @@
             {!! $errors->first('usuario', '<div class="invalid-feedback">:message</p>') !!}
         </div>
         <div class="form-group">
+            {{ Form::label('estado') }}
+            {{ Form::text('estado', $prestamo->estado, ['class' => 'form-control' . ($errors->has('estado') ? ' is-invalid' : ''), 'placeholder' => 'Estado']) }}
+            {!! $errors->first('estado', '<div class="invalid-feedback">:message</p>') !!}
+        </div>
+        <div class="form-group">
             {{ Form::label('fecha_inicio') }}
             {{ Form::text('fecha_inicio', $prestamo->fecha_inicio, ['class' => 'form-control' . ($errors->has('fecha_inicio') ? ' is-invalid' : ''), 'placeholder' => 'Fecha Inicio']) }}
             {!! $errors->first('fecha_inicio', '<div class="invalid-feedback">:message</p>') !!}

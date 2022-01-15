@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property $id
  * @property $equipo_id
  * @property $usuario
+ * @property $estado
  * @property $fecha_inicio
  * @property $fecha_fin
  * @property $fecha_fentrega
@@ -25,10 +26,6 @@ class Prestamo extends Model
     
     static $rules = [
 		'equipo_id' => 'required',
-		'usuario' => 'required',
-		'fecha_inicio' => 'required',
-		'fecha_fin' => 'required',
-		'fecha_fentrega' => 'required',
     ];
 
     protected $perPage = 20;
@@ -38,7 +35,7 @@ class Prestamo extends Model
      *
      * @var array
      */
-    protected $fillable = ['equipo_id','usuario','fecha_inicio','fecha_fin','fecha_fentrega'];
+    protected $fillable = ['equipo_id','usuario','estado','fecha_inicio','fecha_fin','fecha_fentrega'];
 
 
     /**
