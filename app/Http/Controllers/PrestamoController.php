@@ -19,9 +19,24 @@ class PrestamoController extends Controller
      */
     public function index()
     {
+
+        $prestamos = new Prestamo();
+
+        $fecha_actual = strtotime(date("d-m-Y H:i:00",time()));
+        $fecha_entrega = strtotime($prestamos->fecha_entrega);
+        $fecha_inicio = strtotime($prestamos->fecha_inicio);
+        $fecha_fin = strtotime($prestamos->fecha_fin);
+        
+        if($fecha_actual > $fecha_entrega)
+	    {
+	        $multa = 5;
+	    }else{
+		    $multa = 0;
+		}
+
         $prestamos = Prestamo::paginate();
 
-        return view('prestamo.index', compact('prestamos'))
+        return view('prestamo.index', compact('prestamos', 'multa'))
             ->with('i', (request()->input('page', 1) - 1) * $prestamos->perPage());
     }
 

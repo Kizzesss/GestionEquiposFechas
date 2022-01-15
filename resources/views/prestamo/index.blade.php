@@ -41,7 +41,7 @@
 										<th>Estado</th>
 										<th>Fecha Inicio</th>
 										<th>Fecha Fin</th>
-										<th>Fecha Fentrega</th>
+										<th>Fecha Entrega</th>
 
                                         <th></th>
                                     </tr>
@@ -56,7 +56,7 @@
 											<td>{{ $prestamo->estado }}</td>
 											<td>{{ $prestamo->fecha_inicio }}</td>
 											<td>{{ $prestamo->fecha_fin }}</td>
-											<td>{{ $prestamo->fecha_fentrega }}</td>
+											<td>{{ $prestamo->fecha_entrega }}</td>
 
                                             <td>
                                                 <form action="{{ route('prestamos.destroy',$prestamo->id) }}" method="POST">
@@ -120,13 +120,15 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($prestamos as $prestamo)
+
                                         <tr>  
 
 											<td>{{ $prestamo->equipo_id }}</td>
 											<td>{{ $prestamo->usuario }}</td>
-                                            <td></td>  
+                                            <td>{{ $multa }}</td>  
 
                                         </tr>
+
                                     @endforeach
                                 </tbody>
                             </table>

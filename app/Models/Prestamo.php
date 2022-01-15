@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property $estado
  * @property $fecha_inicio
  * @property $fecha_fin
- * @property $fecha_fentrega
+ * @property $fecha_entrega
  * @property $created_at
  * @property $updated_at
  *
@@ -35,7 +35,7 @@ class Prestamo extends Model
      *
      * @var array
      */
-    protected $fillable = ['equipo_id','usuario','estado','fecha_inicio','fecha_fin','fecha_fentrega'];
+    protected $fillable = ['equipo_id','usuario','estado','fecha_inicio','fecha_fin','fecha_entrega'];
 
 
     /**

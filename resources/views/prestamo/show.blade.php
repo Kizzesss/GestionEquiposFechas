@@ -41,8 +41,8 @@
                             {{ $prestamo->fecha_fin }}
                         </div>
                         <div class="form-group">
-                            <strong>Fecha Fentrega:</strong>
-                            {{ $prestamo->fecha_fentrega }}
+                            <strong>Fecha Entrega:</strong>
+                            {{ $prestamo->fecha_entrega }}
                         </div>
 
                     </div>

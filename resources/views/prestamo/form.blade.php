@@ -27,9 +27,9 @@
             {!! $errors->first('fecha_fin', '<div class="invalid-feedback">:message</p>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('fecha_fentrega') }}
-            {{ Form::text('fecha_fentrega', $prestamo->fecha_fentrega, ['class' => 'form-control' . ($errors->has('fecha_fentrega') ? ' is-invalid' : ''), 'placeholder' => 'Fecha Fentrega']) }}
-            {!! $errors->first('fecha_fentrega', '<div class="invalid-feedback">:message</p>') !!}
+            {{ Form::label('fecha_entrega') }}
+            {{ Form::text('fecha_entrega', $prestamo->fecha_entrega, ['class' => 'form-control' . ($errors->has('fecha_entrega') ? ' is-invalid' : ''), 'placeholder' => 'Fecha Entrega']) }}
+            {!! $errors->first('fecha_entrega', '<div class="invalid-feedback">:message</p>') !!}
         </div>
 
     </div>
