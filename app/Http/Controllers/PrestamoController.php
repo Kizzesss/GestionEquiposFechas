@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Prestamo;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use DateTime;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class PrestamoController
@@ -112,20 +114,37 @@ class PrestamoController extends Controller
 
     public function filtrar(Request $request){ 
 
-        //$inicio = $prestamos->fecha_inicio;
-        $prestamos = new Prestamo();
-        
-        $fecha_actual = strtotime(date("d-m-Y H:i:00",time()));      
-        $fecha_inicio = strtotime($prestamos->fecha_inicio);
-        $fecha_fin = strtotime($prestamos->fecha_fin);
-        $fecha_entrega = strtotime($prestamos->fecha_entrega);
+        $prestamos = Prestamo::all();
 
-        if($fecha_actual > $fecha_entrega)
-        {
-            $multa = 5;
-        }else{
-            $multa = 0;
+        $curdate = Carbon::now(); 
+
+        foreach($prestamos as $prestamo){
+            
+            $fin = $prestamo->fecha_fin->toDateTimeString();
+            $entrega = $prestamo->fecha_entrega->toDateTimeString();
+
+            $estado = $prestamo->estado;
+
+            if($estado == 'Devuelto'){
+                if($entrega > $fin){
+                    $imp = 5;
+                    $dias_mora = $entrega->diffInDays($fin);
+                    $multa = $dias_mora * $imp;
+                }else{
+                    $multa = 8;
+                }
+            }else{
+                if($curdate > $fin){
+                    $imp = 5;
+                    $dias_mora = $curdate->diffInDays($fin);
+                    $multa = $dias_mora * $imp;
+                }else{
+                    $multa = 7;
+                }
+                echo($fin);
+            }
         }
+
 
         $prestamos = Prestamo::where('fecha_inicio', '>=', $request->fecha_inicio)
             ->where('fecha_fin', '<=', $request->fecha_fin)
