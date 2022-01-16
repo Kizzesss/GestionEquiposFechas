@@ -120,15 +120,15 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($prestamos as $prestamo)
-
+                                        @if ($multa > 0)
                                         <tr>  
 
 											<td>{{ $prestamo->equipo_id }}</td>
 											<td>{{ $prestamo->usuario }}</td>
                                             <td>{{ $multa }}</td>  
 
-                                        </tr>
-
+                                        </tr>                                         
+                                        @endif
                                     @endforeach
                                 </tbody>
                             </table>
