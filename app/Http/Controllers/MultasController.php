@@ -23,7 +23,6 @@ class MultasController extends Controller
             ->where('fecha_fin', '<=', $request->fecha_fin)
             ->paginate();  
 
-        foreach
         $multa = $this->calcularMulta($prestamos);
 
         $datos['prestamos'] = $prestamos;
