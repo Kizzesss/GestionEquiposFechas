@@ -21,11 +21,9 @@ class PrestamoController extends Controller
      */
     public function index()
     {
-        $multa = null;
-
         $prestamos = Prestamo::paginate();
 
-        return view('prestamo.index', compact('prestamos', 'multa'))
+        return view('prestamo.index', compact('prestamos'))
             ->with('i', (request()->input('page', 1) - 1) * $prestamos->perPage());
     }
 
@@ -112,46 +110,4 @@ class PrestamoController extends Controller
             ->with('success', 'Prestamo deleted successfully');
     }
 
-    public function filtrar(Request $request){ 
-
-        $prestamos = Prestamo::all();
-
-        $curdate = Carbon::now(); 
-
-        foreach($prestamos as $prestamo){
-            
-            $fin = $prestamo->fecha_fin->toDateTimeString();
-            $entrega = $prestamo->fecha_entrega->toDateTimeString();
-
-            $estado = $prestamo->estado;
-
-            if($estado == 'Devuelto'){
-                if($entrega > $fin){
-                    $imp = 5;
-                    $dias_mora = $entrega->diffInDays($fin);
-                    $multa = $dias_mora * $imp;
-                }else{
-                    $multa = 8;
-                }
-            }else{
-                if($curdate > $fin){
-                    $imp = 5;
-                    $dias_mora = $curdate->diffInDays($fin);
-                    $multa = $dias_mora * $imp;
-                }else{
-                    $multa = 7;
-                }
-                echo($fin);
-            }
-        }
-
-
-        $prestamos = Prestamo::where('fecha_inicio', '>=', $request->fecha_inicio)
-            ->where('fecha_fin', '<=', $request->fecha_fin)
-            ->paginate();  
-
-        return view('prestamo.index', compact('prestamos', 'multa'))
-            ->with('i', (request()->input('page', 1) - 1) * $prestamos->perPage());
-
-    }
 }

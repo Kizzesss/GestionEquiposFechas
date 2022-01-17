@@ -4,6 +4,7 @@ use App\Http\Controllers\PrestamoController;
 use App\Models\Prestamo;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\MultasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,10 @@ Auth::routes();
 Route::resource('prestamos', App\Http\Controllers\PrestamoController::class)->middleware('auth');
 Route::resource('equipos', App\Http\Controllers\EquipoController::class)->middleware('auth');
 
-Route::post('/prestamos', [PrestamoController::class, 'filtrar'])->name('prestamos.filtrar');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/multas', [MultasController::class, 'index'])->name('multas.index');
+Route::post('/multas', [MultasController::class, 'filtrar'])->name('multas.filtrar');
+
+
