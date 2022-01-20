@@ -44,13 +44,17 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($prestamos as $prestamo)
+                                        @if ($prestamo->multa > 0)
+                                        
                                         <tr>  
 
 											<td>{{ $prestamo->equipo_id }}</td>
 											<td>{{ $prestamo->usuario }}</td>
-                                            <td>{{ $multas }}</td>  
+                                            <td>{{ $prestamo->multa }}</td>  
 
-                                        </tr>                                         
+                                        </tr>
+                                        
+                                        @endif
                                     @endforeach
                                 </tbody>
                             </table>

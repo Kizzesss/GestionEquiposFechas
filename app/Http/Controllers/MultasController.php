@@ -14,52 +14,55 @@ class MultasController extends Controller
         $multa = null; 
 
         $datos['prestamos'] = Prestamo::paginate(10);
-        $datos['multas'] = $multa;
+        $datos['multa'] = $multa;
         return view('multas.index', $datos); 
     }
 
     public function filtrar(Request $request){ 
         $prestamos = Prestamo::where('fecha_inicio', '>=', $request->fecha_inicio)
             ->where('fecha_fin', '<=', $request->fecha_fin)
-            ->paginate();  
+            ->get();  
 
-        $multa = $this->calcularMulta($prestamos);
+        foreach ($prestamos as $prestamo) {
+            $prestamo->multa = $this->calcularMulta($prestamo);
+            //echo($prestamo->multa."<br>");
+        }
 
+        //echo($multa);
         $datos['prestamos'] = $prestamos;
-        $datos['multas'] = $multa;
+        //echo($datos['prestamos']);
         return view('multas.index', $datos);
-
     }
 
     public function calcularMulta($prestamos){
         $multa = 0;
         $imp = 5;
-        foreach ($prestamos as $prestamo) {
-            $estado = $prestamo->estado;
+        
+            $estado = $prestamos->estado;
 
-            $fecha_fin = Carbon::parse($prestamo->fecha_fin);
-            $fecha_entrega = Carbon::parse($prestamo->fecha_entrega);
+            $fecha_fin = Carbon::parse($prestamos->fecha_fin);
+            $fecha_entrega = Carbon::parse($prestamos->fecha_entrega);
             $fecha_actual = Carbon::now();
 
             if($estado == 'Prestado'){
                 if($fecha_actual > $fecha_fin){
                     $diferencia = $fecha_actual->diffInDays($fecha_fin);
                     $multa = $multa + ($diferencia * $imp);
-                    echo("primer if");
+                    //echo("primer if");
                 }else{
                     $multa = $multa + 0;
-                    echo("segundo if");
+                    //echo("segundo if");
                 }
             }else{
                 if($fecha_entrega > $fecha_fin){
                     $diferencia = $fecha_entrega->diffInDays($fecha_fin);
                     $multa = $multa + ($diferencia * $imp);
-                    echo("tercer if");
+                    //echo("tercer if");
                 }else{
                     $multa = $multa + 0;
-                    echo("cuarto if");
+                    //echo("cuarto if");
                 }
-            }
+            
         }
         return $multa;
     }
